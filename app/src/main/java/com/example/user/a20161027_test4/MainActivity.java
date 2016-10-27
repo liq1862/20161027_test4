@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button bt;
     Button bt2;
     Button bt3;
+    Button bt4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         bt =(Button) findViewById(R.id.button);
         bt2 =(Button) findViewById(R.id.button2);
         bt3 =(Button) findViewById(R.id.button3);
+        bt4 =(Button) findViewById(R.id.button4);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +90,29 @@ public class MainActivity extends AppCompatActivity {
                             ch = tmp;
                             tv.setText(str[ch]);
                         }
+                    }
+                });
+                builder.show();
+            }
+        });
+        bt4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("多選一");
+
+                builder.setItems(R.array.drinks, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String[] str = getResources().getStringArray(R.array.drinks);
+                        TextView tv2 = (TextView) findViewById(R.id.textView2);
+                        tv2.setText(str[which]);
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
                 });
                 builder.show();
