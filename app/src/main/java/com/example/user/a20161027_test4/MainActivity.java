@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    int tmp, ch;
+    int tmp, ch=-1;
     Button bt;
     Button bt2;
     Button bt3;
@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String[] str = getResources().getStringArray(R.array.drinks);
-                        TextView tv = (TextView) findViewById(R.id.textView);
-                        ch = tmp;
-                        tv.setText(str[ch]);
+                        if (tmp >= 0) {
+                            String[] str = getResources().getStringArray(R.array.drinks);
+                            TextView tv = (TextView) findViewById(R.id.textView2);
+                            ch = tmp;
+                            tv.setText(str[ch]);
+                        }
                     }
                 });
                 builder.show();
