@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     Button bt2;
     Button bt3;
     Button bt4;
+    Button bt5;
+    boolean chks[] = new boolean[4];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         bt2 =(Button) findViewById(R.id.button2);
         bt3 =(Button) findViewById(R.id.button3);
         bt4 =(Button) findViewById(R.id.button4);
+        bt5 =(Button) findViewById(R.id.button5);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +110,41 @@ public class MainActivity extends AppCompatActivity {
                         String[] str = getResources().getStringArray(R.array.drinks);
                         TextView tv3 = (TextView) findViewById(R.id.textView3);
                         tv3.setText(str[which]);
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+        bt5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("多選一");
+                builder.setMultiChoiceItems(R.array.drinks, chks, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                    }
+                });
+                builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String[] str = getResources().getStringArray(R.array.drinks);
+                        TextView tv4 = (TextView) findViewById(R.id.textView4);
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i <= 3; i++) {
+                            if (chks[i]) {
+                                sb.append(str[i] + ",");
+                            }
+                        }
+
+                        tv4.setText(sb);
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
