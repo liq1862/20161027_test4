@@ -7,17 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    int tmp, ch;
     Button bt;
     Button bt2;
+    Button bt3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bt =(Button) findViewById(R.id.button);
         bt2 =(Button) findViewById(R.id.button2);
+        bt3 =(Button) findViewById(R.id.button3);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +62,30 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this,"輸入為: "+ed.getText().toString(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("多選一");
+                tmp = ch;
+                builder.setSingleChoiceItems(R.array.drinks, tmp, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tmp = which;
+                    }
+                });
+                builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String[] str = getResources().getStringArray(R.array.drinks);
+                        TextView tv = (TextView) findViewById(R.id.textView);
+                        ch = tmp;
+                        tv.setText(str[ch]);
                     }
                 });
                 builder.show();
