@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String[] str = getResources().getStringArray(R.array.drinks);
-                        TextView tv2 = (TextView) findViewById(R.id.textView2);
-                        tv2.setText(str[which]);
+                        TextView tv3 = (TextView) findViewById(R.id.textView3);
+                        tv3.setText(str[which]);
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
