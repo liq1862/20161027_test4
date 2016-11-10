@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button bt4;
     Button bt5;
     boolean chks[] = new boolean[4];
+    boolean tmps[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,9 +125,10 @@ public class MainActivity extends AppCompatActivity {
         bt5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tmps = chks.clone();
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("多選一");
-                builder.setMultiChoiceItems(R.array.drinks, chks, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setTitle("多選多");
+                builder.setMultiChoiceItems(R.array.drinks, tmps, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        chks = tmps.clone();
                         String[] str = getResources().getStringArray(R.array.drinks);
                         TextView tv4 = (TextView) findViewById(R.id.textView4);
                         StringBuilder sb = new StringBuilder();
@@ -150,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        tmps = chks.clone();
                         dialog.dismiss();
                     }
                 });
